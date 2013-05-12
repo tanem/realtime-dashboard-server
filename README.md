@@ -31,7 +31,7 @@ e.g. to start the server in demo mode:
 
     $ NODE_ENV=demo node app.js
 
-### Unit tests
+## Unit tests
 
 The server unit tests use:
 
@@ -47,7 +47,7 @@ To watch for changes and execute tests:
 
     $ make test-w
 
-### Unit test coverage
+## Unit test coverage
 
 [JSCoverage](http://siliconforks.com/jscoverage/) is used to add instrumentation to the JavaScript code, which is output to the `./lib-cov` directory. [Mocha's](http://visionmedia.github.io/mocha/) HTMLCov reporter then captures the necessary coverage information and generates a single-page HTML report.
 
