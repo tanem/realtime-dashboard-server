@@ -1,0 +1,35 @@
+{
+  "name": "realtime-dashboard-server",
+  "description": "Server component of a realtime dashboard.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Tane Morgan",
+    "url": "http://github.com/tanem"
+  },
+  "homepage": "http://github.com/tanem/realtime-dashboard-server",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tanem/realtime-dashboard-server.git"
+  },
+  "bugs": {
+    "url": "http://github.com/tanem/realtime-dashboard-server/issues"
+  },
+  "engines": {
+    "node": ">= 0.10.3",
+    "npm": ">= 1.2.17"
+  },
+  "dependencies": {
+    "express": "~3.1.2",
+    "socket.io": "~0.9.14",
+    "walkdir": "0.0.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0",
+    "sinon": "~1.6.0",
+    "expect.js": "~0.2.0",
+    "supertest": "~0.6.0"
+  },
+  "scripts": {
+    "test": "make test"
+  }
+}
