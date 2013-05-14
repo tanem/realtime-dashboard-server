@@ -27,7 +27,11 @@ The server accepts the following command line args:
 
 Note that the Socket.IO logger is used for logging. The `dev` and `demo` envs default to log level 3, `test` env defaults to log level 1.
 
-e.g. to start the server in demo mode:
+## Demo
+
+Sample [PerformanceTiming](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html) data is provided in the `./demo` directory. This data is sent at random intervals to the server during demo mode. The data being emitted to clients is logged to the console in debug mode.
+
+To start the server in demo mode:
 
     $ NODE_ENV=demo node app.js
 
@@ -54,5 +58,3 @@ To watch for changes and execute tests:
 To generate and view the HTML coverage report:
 
     $ make test-cov && open coverage.html
-
-
