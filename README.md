@@ -53,8 +53,8 @@ To watch for changes and execute tests:
 
 ## Unit test coverage
 
-[JSCoverage](http://siliconforks.com/jscoverage/) is used to add instrumentation to the JavaScript code, which is output to the `./lib-cov` directory. [Mocha's](http://visionmedia.github.io/mocha/) HTMLCov reporter then captures the necessary coverage information and generates a single-page HTML report.
+[JSCoverage](http://siliconforks.com/jscoverage/) is used to add instrumentation to the JavaScript code, which is output to the `./lib-cov` directory. [Mocha's](http://visionmedia.github.io/mocha/) HTMLCov reporter captures the necessary coverage information and generates a single-page HTML report `./coverage.html`
 
-To generate and view the HTML coverage report:
+To generate the coverage report:
 
-    $ make test-cov && open coverage.html
+    $ make test-cov
