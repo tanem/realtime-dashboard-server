@@ -58,3 +58,7 @@ To watch for changes and execute tests:
 To generate the coverage report:
 
     $ make test-cov
+    
+## Credits
+
+ * [Hummingbird](http://hummingbirdstats.com/), the original inspiration for this component.
