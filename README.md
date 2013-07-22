@@ -6,26 +6,33 @@ The server component of a realtime dashboard application. It's based on [Express
 
 ## Dependencies
 
+Ensure the following are installed:
+
  * [Node.js](http://nodejs.org/)
  * [npm](https://npmjs.org/)
- * [JSCoverage](http://siliconforks.com/jscoverage/)
  
-Installing:
+Install the global dependencies:
+
+    $ npm install -g grunt-cli istanbul node-inspector
+
+Change to your project directory then install the local dependencies:
 
     $ npm install
 
 ## Running the server
 
-Install all dependencies, then to start the server in the default environment (dev):
+To start the server in the default environment (development):
 
-    $ node app.js
+    $ grunt start
 
-The server accepts the following command line args:
+Can be accessed via `http://127.0.0.1:3000/client/`. [Node Inspector](https://github.com/dannycoates/node-inspector) will also be available via `http://0.0.0.0:8080/debug?port=5858`.
 
- * `NODE_ENV`: dev (default) / test / demo
- * `LOG_LEVEL`: 0 (error) / 1 (warn) / 2 (info) / 3 (debug, default)
+Once started, the app will also:
 
-Note that the Socket.IO logger is used for logging. The `dev` and `demo` envs default to log level 3, `test` env defaults to log level 1.
+ * Watch the server source files, and restart the Node server if any changes are made
+ * Watch the relevant JS files, and run the relevant JSHint tasks if any changes are made
+
+Note that the Socket.IO logger is used for logging. The `development` and `demo` envs default to log level 3, `test` env defaults to log level 1.
 
 ## Demo
 
@@ -33,7 +40,7 @@ Sample [PerformanceTiming](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/Nav
 
 To start the server in demo mode:
 
-    $ NODE_ENV=demo node app.js
+    $ grunt start:demo
 
 ## Unit tests
 
@@ -45,16 +52,22 @@ The server unit tests use:
 
 To run:
 
-    $ make test
-
-To watch for changes and execute tests:
-
-    $ make test-w
+    $ grunt test
 
 ## Unit test coverage
 
-[JSCoverage](http://siliconforks.com/jscoverage/) is used to add instrumentation to the JavaScript code, which is output to the `./lib-cov` directory. [Mocha's](http://visionmedia.github.io/mocha/) HTMLCov reporter captures the necessary coverage information and generates a single-page HTML report `./coverage.html`
+[Istanbul](https://github.com/gotwarlost/istanbul) provides code coverage. To generate the coverage report:
 
-To generate the coverage report:
+    $ grunt cover
 
-    $ make test-cov
+Outputs to `./_coverage'.
+
+## Docs
+
+ * [Docker](https://github.com/Prevole/grunt-docker) is used to generate the documentation.
+ 
+To generate:
+
+    $ grunt docs
+
+Outputs to `./_docs'.
