@@ -71,3 +71,7 @@ To generate:
     $ grunt docs
 
 Outputs to `./_docs'.
+    
+## Credits
+
+ * [Hummingbird](http://hummingbirdstats.com/), the original inspiration for this component.
