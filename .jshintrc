@@ -1,5 +1,15 @@
 {
-  "browser": true,
-  "es5": true,
-  "expr": true
+  "node": true,
+  "strict": true,
+  "unused": true,
+  "undef": true,
+  "trailing": true,
+  "globals": {
+    "describe": false,
+    "before": false,
+    "after": false,
+    "it": false,
+    "afterEach": false,
+    "beforeEach": false
+  }
 }
