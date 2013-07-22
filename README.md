@@ -74,4 +74,5 @@ Outputs to `./_docs'.
     
 ## Credits
 
- * [Hummingbird](http://hummingbirdstats.com/), the original inspiration for this component.
+ * [Hummingbird](http://hummingbirdstats.com/), the original inspiration for this component
+ * [@appleYaks](https://github.com/appleYaks), whose [grunt-express-workflow](https://github.com/appleYaks/grunt-express-workflow) I leaned heavily on when configuring Istanbul and Node Inspector
