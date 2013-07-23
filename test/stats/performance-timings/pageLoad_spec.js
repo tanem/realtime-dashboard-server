@@ -40,6 +40,10 @@ describe('stats / performance timings / page load', function(){
       expect(pageLoad.data).to.eql([]);
     });
 
+    it('should return 0 if there is no data', function(){
+      expect(pageLoad.execute()).to.be(0);
+    });
+
   });
 
   it('should be named "pageLoad"', function(){

@@ -1,29 +1,29 @@
 'use strict';
 
-var _ = require('lodash'),
-  http = require('http'),
+var http = require('http'),
   path = require('path'),
-  events = require('events'),
-  util = require('util'),
   walk = require('walkdir'),
   express = require('express'),
   io = require('socket.io'),
+  _ = require('lodash'),
   eventMediator = require('./eventMediator'),
   statsComposite = require('./statsComposite'),
-  Demo = require('./demo'),
-  utils = require('./utils');
+  Demo = require('./demo');
+
+var logLevels = {
+  development: 3,
+  test: 1,
+  demo: 3
+};
 
 var Server = module.exports = function Server(options) {
-  events.EventEmitter.call(this);
   options = options || {};
   this.hostname = options.hostname || '127.0.0.1';
   this.port = _.isUndefined(options.port) ? 3000 : +options.port;
   this.env = options.env || 'development';
-  this.logLevel = +options.logLevel || 1;
+  this.logLevel = +options.logLevel || logLevels[this.env];
   this._init();
 };
-
-util.inherits(Server, events.EventEmitter);
 
 Server.prototype._init = function(){
   this.app = express();
@@ -37,12 +37,13 @@ Server.prototype._init = function(){
 };
 
 Server.prototype._configure = function(){
-  var self = this;
   this.app.use(express.bodyParser());
   this._loadRoute('api');
-  this.io.sockets.on('connection', function(socket){
-    self.sockets.push(socket);
-  });
+  this.io.sockets.on('connection', this._socketConnectionHandler.bind(this));
+};
+
+Server.prototype._socketConnectionHandler = function(socket){
+  this.sockets.push(socket);
 };
 
 Server.prototype._loadRoute = function(route){
@@ -66,23 +67,21 @@ Server.prototype._startStats = function(){
 };
 
 Server.prototype._startDemo = function(){
-  var demo = new Demo();
-  demo.start();
+  new Demo();
 };
 
 Server.prototype.start = function(cb){
-  var self = this;
-  this.server.listen(this.port, this.hostname, function(){
-    // Setting port again here since we could have started on a random port.
-    self.port = this.address().port;
-    self.emit('listening', self.hostname, self.port, self.env);
-    self.logger.info('Server started in ' + self.env + ' mode at http://127.0.0.1:' + self.server.address().port);
-    self.emit('listening');
-    eventMediator.subscribe('statResult', self.emitDataToAllSockets.bind(self));
-    self._startStats();
-    if (self.env === 'demo') self._startDemo();
-    if (utils.isFunction(cb)) cb();
-  });
+  this.server.listen(this.port, this.hostname, this._listenHandler.bind(this, cb));
+};
+
+Server.prototype._listenHandler = function(cb){
+  // Setting port again here since we could have started on a random port.
+  this.port = this.server.address().port;
+  this.logger.info('Server started in ' + this.env + ' mode at http://' + this.hostname + ':' + this.port);
+  eventMediator.subscribe('statResult', this.emitDataToAllSockets.bind(this));
+  this._startStats();
+  if (this.env === 'demo') this._startDemo();
+  if (_.isFunction(cb)) cb();
 };
 
 Server.prototype.stop = function(){
@@ -97,5 +96,9 @@ Server.prototype.emitDataToAllSockets = function(name, data){
 };
 
 Server.prototype.getPort = function(){
-  return this.server.address().port;
+  return this.port;
+};
+
+Server.prototype.getHostname = function(){
+  return this.hostname;
 };

@@ -6,31 +6,26 @@ The server component of a realtime dashboard application. It's based on [Express
 
 ## Dependencies
 
-Ensure the following are installed:
-
  * [Node.js](http://nodejs.org/)
  * [npm](https://npmjs.org/)
  
-Install the global dependencies:
-
-    $ npm install -g grunt-cli istanbul node-inspector
-
-Change to your project directory then install the local dependencies:
-
+Installing:
+    
+    $ npm install -g istanbul
     $ npm install
 
 ## Running the server
 
-To start the server in the default environment (development):
+Install all dependencies, then to start the server in the default environment (development):
 
-    $ grunt start
+    $ node src/app.js
 
-Can be accessed via `http://127.0.0.1:3000/client/`. [Node Inspector](https://github.com/dannycoates/node-inspector) will also be available via `http://0.0.0.0:8080/debug?port=5858`.
-
-Once started, the app will also:
-
- * Watch the server source files, and restart the Node server if any changes are made
- * Watch the relevant JS files, and run the relevant JSHint tasks if any changes are made
+The server accepts the following command line args:
+ 
+ * `--HOSTNAME`: defaults to 127.0.0.1
+ * `--PORT`: 0 will be a random port, defaults to 3000
+ * `--ENV`: dev (default) / test / demo
+ * `--LOG_LEVEL`: 0 (error) / 1 (warn) / 2 (info) / 3 (debug)
 
 Note that the Socket.IO logger is used for logging. The `development` and `demo` envs default to log level 3, `test` env defaults to log level 1.
 
@@ -40,7 +35,7 @@ Sample [PerformanceTiming](https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/Nav
 
 To start the server in demo mode:
 
-    $ grunt start:demo
+    $ node src/app.js --ENV=demo
 
 ## Unit tests
 
@@ -52,27 +47,23 @@ The server unit tests use:
 
 To run:
 
-    $ grunt test
+    $ make test
+
+To watch for changes and execute tests:
+
+    $ make test-w
 
 ## Unit test coverage
 
-[Istanbul](https://github.com/gotwarlost/istanbul) provides code coverage. To generate the coverage report:
+[Istanbul](https://github.com/gotwarlost/istanbul) is used to provide code coverage.
 
-    $ grunt cover
+To generate the coverage report:
 
-Outputs to `./_coverage'.
+    $ make test-cov
 
-## Docs
-
- * [Docker](https://github.com/Prevole/grunt-docker) is used to generate the documentation.
- 
-To generate:
-
-    $ grunt docs
-
-Outputs to `./_docs'.
+Outputs to `_coverage`.
     
 ## Credits
 
  * [Hummingbird](http://hummingbirdstats.com/), the original inspiration for this component
- * [@appleYaks](https://github.com/appleYaks), whose [grunt-express-workflow](https://github.com/appleYaks/grunt-express-workflow) I leaned heavily on when configuring Istanbul and Node Inspector
+ * [@appleYaks](https://github.com/appleYaks), whose [grunt-express-workflow](https://github.com/appleYaks/grunt-express-workflow) had a working Istanbul setup I could base mine off

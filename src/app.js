@@ -1,7 +1,7 @@
 'use strict';
 
-var Server = require('./server'),
-  argv = require('optimist').argv;
+var Server = require('./server');
+var argv = require('optimist').argv;
 
 var server = new Server({
   hostname: argv.HOSTNAME,

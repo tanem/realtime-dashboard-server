@@ -1,20 +1,20 @@
 'use strict';
 
-var grunt = require('grunt'),
-  Mocha = require('mocha');
+var walk = require('walkdir');
+var Mocha = require('mocha');
 
-var mocha = new Mocha({ reporter: 'spec', ui: 'bdd' });
+var mocha = new Mocha({
+  reporter: 'dot',
+  ui: 'bdd'
+});
 
-function run(cb) {
-  var files = grunt.file.expand('test/**/*_spec.js');
-  files.forEach(function (file) {
-    mocha.addFile(file);
-  });
-  cb();
-}
+var emitter = walk('./test');
 
-run(function(err){
-  if (err) throw err;
+emitter.on('file',function(filename){
+  if ((/_spec\.js$/).test(filename)) mocha.addFile(filename);
+});
+
+emitter.on('end', function(){
   mocha.run(function(failures){
     process.exit(failures);
   });

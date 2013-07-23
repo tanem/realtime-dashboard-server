@@ -15,8 +15,8 @@ EventMediator.prototype.subscribe = function(event, cb, context){
 };
 
 EventMediator.prototype.publish = function(event){
-  var args = Array.prototype.slice.call(arguments, 1);
   if (this.subscriptions[event]) {
+    var args = Array.prototype.slice.call(arguments, 1);
     this.subscriptions[event].forEach(function(subscription){
       subscription.cb.apply(subscription.context, args);
     }, this);

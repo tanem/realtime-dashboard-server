@@ -40,6 +40,10 @@ describe('stats / performance timings / end to end', function(){
       expect(endToEnd.data).to.eql([]);
     });
 
+    it('should return 0 if there is no data', function(){
+      expect(endToEnd.execute()).to.be(0);
+    });
+
   });
 
   it('should be named "endToEnd"', function(){

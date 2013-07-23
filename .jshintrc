@@ -4,6 +4,7 @@
   "unused": true,
   "undef": true,
   "trailing": true,
+  "expr": true,
   "globals": {
     "describe": false,
     "before": false,

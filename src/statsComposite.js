@@ -1,8 +1,8 @@
 'use strict';
 
-var eventMediator = require('./eventMediator');
-var intervalIds = [];
-var stats = [];
+var eventMediator = require('./eventMediator'),
+  intervalIds = [],
+  stats = [];
 
 module.exports = new StatsComposite();
 

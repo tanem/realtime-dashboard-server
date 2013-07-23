@@ -40,6 +40,10 @@ describe('stats / performance timings / connect time', function(){
       expect(connectTime.data).to.eql([]);
     });
 
+    it('should return 0 if there is no data', function(){
+      expect(connectTime.execute()).to.be(0);
+    });
+
   });
 
   it('should be named "connectTime"', function(){

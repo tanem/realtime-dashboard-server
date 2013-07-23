@@ -17,6 +17,12 @@ describe('eventMediator', function(){
     expect(eventMediator.getSubscriptions()).to.eql({});
   });
 
+  it('should allow clearing of specific events', function(){
+    eventMediator.subscribe('foo', noop);
+    eventMediator.clearSubscriptions('foo');
+    expect(eventMediator.getSubscriptions()).to.eql({});
+  });
+
   it('should return a reference to the array of event subscriptions', function(){
     eventMediator.subscribe('foo', noop);
     eventMediator.subscribe('foo', noop);
@@ -55,6 +61,13 @@ describe('eventMediator', function(){
     eventMediator.publish('foo');
 
     expect(spy.callCount).to.be(2);
+  });
+
+  it('should not attempt to execute callbacks for a non-existent event', function(){
+    var stub = sinon.stub(Array.prototype, 'forEach');
+    eventMediator.publish('foo');
+    expect(stub.callCount).to.be(0);
+    Array.prototype.forEach.restore();
   });
 
   it('should default the callback context to itself', function(){
