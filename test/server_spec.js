@@ -48,7 +48,7 @@ describe('server', function(){
     });
   });
 
-  it('should not attempt to stop the server if it isn\t running', function(){
+  it('should not attempt to stop the server if it isn\'t running', function(){
     sinon.stub(server.server, 'address').returns(false);
     var stub = sinon.stub(server.server, 'close');
     server.stop();
