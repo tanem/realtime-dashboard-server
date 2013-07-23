@@ -8,4 +8,4 @@ branches:
     - master
 
 before_script:
-  - npm install -g grunt-cli istanbul
+  - npm install -g istanbul
