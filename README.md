@@ -41,7 +41,7 @@ To start the server in demo mode:
 
 The server unit tests use:
 
- * [Mocha](http://visionmedia.github.io/mocha/)
+ * [Mocha](http://mochajs.org/)
  * [expect.js](https://github.com/LearnBoost/expect.js)
  * [Sinon.JS](http://sinonjs.org/)
 
