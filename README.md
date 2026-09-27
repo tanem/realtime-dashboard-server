@@ -1,5 +1,7 @@
 # Realtime Dashboard Server
 
+> **Unmaintained.** This project is no longer maintained and the repository is archived.
+
 [![Build Status](https://travis-ci.org/tanem/realtime-dashboard-server.png?branch=master)](https://travis-ci.org/tanem/realtime-dashboard-server)
 
 The server component of a realtime dashboard application. It's based on [Express](http://expressjs.com/) and uses [Socket.IO](http://socket.io/) to emit data to connected browsers.
